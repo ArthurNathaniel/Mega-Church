@@ -7,7 +7,7 @@ $success = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ministry_name = $_POST['ministry_name'];
 
-    // Check if the ministry already exists
+ 
     $sql = "SELECT COUNT(*) FROM ministries WHERE ministry_name = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $ministry_name);
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($count > 0) {
         $error = "A ministry with this name already exists.";
     } else {
-        // Insert the new ministry
+       
         $sql = "INSERT INTO ministries (ministry_name) VALUES (?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $ministry_name);
@@ -117,8 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             submitButton.addEventListener('click', function() {
                 this.textContent = 'Please wait...';
                 this.disabled = true;
-                // Optionally, you can also disable the form submission for a moment
-                // document.querySelector('form').submit();
+               
             });
         });
     </script>

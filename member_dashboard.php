@@ -9,7 +9,7 @@ if (!isset($_SESSION['member_id'])) {
 
 $member_id = $_SESSION['member_id'];
 
-// Fetch member details
+
 $stmt = $conn->prepare("SELECT full_name, email, phone_number, occupation FROM members WHERE id = ?");
 $stmt->bind_param("i", $member_id);
 $stmt->execute();

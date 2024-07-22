@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-// Fetch members from the database
+
 $members = [];
 $sql = "SELECT id, profile_picture, full_name, phone_number, occupation FROM members";
 $result = $conn->query($sql);

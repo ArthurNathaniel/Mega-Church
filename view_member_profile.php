@@ -9,7 +9,7 @@ if (!isset($_SESSION['member_id'])) {
 
 $member_id = $_SESSION['member_id'];
 
-// Fetch member details
+
 $stmt = $conn->prepare("SELECT full_name, email, phone_number, date_of_birth, gender, address, marital_status, ministry_id, occupation, profile_picture FROM members WHERE id = ?");
 $stmt->bind_param("i", $member_id);
 $stmt->execute();
@@ -17,7 +17,7 @@ $stmt->bind_result($full_name, $email, $phone_number, $date_of_birth, $gender, $
 $stmt->fetch();
 $stmt->close();
 
-// Fetch ministry name
+
 $ministry_name = "";
 $ministry_stmt = $conn->prepare("SELECT ministry_name FROM ministries WHERE id = ?");
 $ministry_stmt->bind_param("i", $ministry_id);

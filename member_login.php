@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare the SQL statement to prevent SQL injection
+  
     $stmt = $conn->prepare("SELECT id, password FROM members WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         
         if (password_verify($password, $hashed_password)) {
-            // Password is correct
+        
             $_SESSION['member_id'] = $member_id;
             header("Location: member_dashboard.php");
             exit();

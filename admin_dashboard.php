@@ -7,12 +7,12 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// Fetch total number of members
+
 $total_members_query = "SELECT COUNT(*) FROM members";
 $total_members_result = $conn->query($total_members_query);
 $total_members = $total_members_result->fetch_row()[0];
 
-// Fetch gender distribution
+
 $gender_query = "SELECT gender, COUNT(*) as count FROM members GROUP BY gender";
 $gender_result = $conn->query($gender_query);
 $gender_data = [];
@@ -20,7 +20,7 @@ while ($row = $gender_result->fetch_assoc()) {
     $gender_data[$row['gender']] = $row['count'];
 }
 
-// Fetch marital status distribution
+
 $marital_status_query = "SELECT marital_status, COUNT(*) as count FROM members GROUP BY marital_status";
 $marital_status_result = $conn->query($marital_status_query);
 $marital_status_data = [];
@@ -28,7 +28,7 @@ while ($row = $marital_status_result->fetch_assoc()) {
     $marital_status_data[$row['marital_status']] = $row['count'];
 }
 
-// Fetch ministry distribution
+
 $ministry_query = "SELECT ministries.ministry_name, COUNT(members.id) as count FROM members 
 JOIN ministries ON members.ministry_id = ministries.id GROUP BY ministries.ministry_name";
 $ministry_result = $conn->query($ministry_query);
@@ -80,7 +80,7 @@ $conn->close();
         </div>
     </div>
     <script>
-        // Total Members Chart
+      
         var ctx = document.getElementById('totalMembersChart').getContext('2d');
         var totalMembersChart = new Chart(ctx, {
             type: 'bar',
@@ -101,7 +101,7 @@ $conn->close();
             }
         });
 
-        // Gender Distribution Chart
+        
         var ctx = document.getElementById('genderChart').getContext('2d');
         var genderChart = new Chart(ctx, {
             type: 'bar',
@@ -115,7 +115,7 @@ $conn->close();
             }
         });
 
-        // Marital Status Distribution Chart
+    
         var ctx = document.getElementById('maritalStatusChart').getContext('2d');
         var maritalStatusChart = new Chart(ctx, {
             type: 'doughnut',
@@ -129,7 +129,7 @@ $conn->close();
             }
         });
 
-        // Ministry Distribution Chart
+      
         var ctx = document.getElementById('ministryChart').getContext('2d');
         var ministryChart = new Chart(ctx, {
             type: 'pie',

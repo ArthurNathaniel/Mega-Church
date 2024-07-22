@@ -11,7 +11,7 @@ $member_id = $_SESSION['member_id'];
 $error = "";
 $success = "";
 
-// Fetch member details
+
 $stmt = $conn->prepare("SELECT full_name, email, phone_number, date_of_birth, gender, address, marital_status, ministry_id, occupation, profile_picture FROM members WHERE id = ?");
 $stmt->bind_param("i", $member_id);
 $stmt->execute();
@@ -19,7 +19,7 @@ $stmt->bind_result($full_name, $email, $phone_number, $date_of_birth, $gender, $
 $stmt->fetch();
 $stmt->close();
 
-// Fetch ministries for dropdown
+
 $ministries = [];
 $sql = "SELECT id, ministry_name FROM ministries";
 $result = $conn->query($sql);
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $occupation = $_POST['occupation'];
     $profile_picture = $_FILES['profile_picture']['name'];
 
-    // Upload profile picture
+
     if (!empty($profile_picture)) {
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($profile_picture);
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $profile_picture = $_POST['existing_profile_picture'];
     }
 
-    // Update profile
+
     $sql = "UPDATE members SET full_name = ?, email = ?, phone_number = ?, date_of_birth = ?, gender = ?, address = ?, marital_status = ?, ministry_id = ?, occupation = ?, profile_picture = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssssssssi", $full_name, $email, $phone_number, $date_of_birth, $gender, $address, $marital_status, $ministry_id, $occupation, $profile_picture, $member_id);

@@ -4,7 +4,7 @@ include 'db.php';
 $error = "";
 $success = "";
 
-// Fetch ministries from the database
+
 $ministries = [];
 $sql = "SELECT id, ministry_name FROM ministries";
 $result = $conn->query($sql);
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Check for duplicates
+ 
     $sql = "SELECT COUNT(*) FROM members WHERE full_name = ? AND email = ? AND phone_number = ? AND date_of_birth = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $full_name, $email, $phone_number, $date_of_birth);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($count > 0) {
         $error = "A member with the same Full Name, Email, Phone Number, and Date of Birth already exists.";
     } else {
-        // Upload profile picture
+      
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($profile_picture);
         move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_file);

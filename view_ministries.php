@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-// Handle delete request
+
 if (isset($_GET['delete'])) {
     $ministry_id = $_GET['delete'];
 
@@ -18,7 +18,7 @@ if (isset($_GET['delete'])) {
     $stmt->close();
 }
 
-// Fetch ministries
+
 $sql = "SELECT * FROM ministries";
 $result = $conn->query($sql);
 
